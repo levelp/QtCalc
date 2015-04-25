@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget* parent) :
   ui(new Ui::MainWindow) {
   ui->setupUi(this);
 
-  ui->debugOperation->setText(QChar(NO_OPERATION));
+  ui->operation->setText(QChar(NO_OPERATION));
 
   setState(ENTER_NUMBER);
 }
@@ -95,7 +95,7 @@ void MainWindow::on_operation_clicked() {
   double res = 0;
   QString nextOp = operButton->text();
 
-  switch (ui->debugOperation->text().at(0).toLatin1()) {
+  switch (ui->operation->text().at(0).toLatin1()) {
     case '+':
       res = a + b;
       break;
@@ -127,9 +127,9 @@ void MainWindow::on_operation_clicked() {
 
   // Запоминаем нажатую кнопку - следующую операцию
   if(nextOp == QStringLiteral("="))
-    ui->debugOperation->setText(QChar(NO_OPERATION));
+    ui->operation->setText(QChar(NO_OPERATION));
   else
-    ui->debugOperation->setText(nextOp);
+    ui->operation->setText(nextOp);
 
   QString strTemplate("%1");
   QString strRes = strTemplate.arg(res);
