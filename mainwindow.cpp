@@ -23,12 +23,12 @@ void MainWindow::clearDisplay() {
 }
 
 void MainWindow::on_digit_clicked() {
-  /// Когда нажимаем на цифру:
+  /// Когда нажимаем на любую кнопку с цифрой
+  /// вызывается этот слот:
   ///-->
   switch (calcState) {
     case OPERATION: // Если сейчас операция
-      // Очищаем дисплей
-      clearDisplay();
+      clearDisplay(); // Очищаем дисплей
       break;
 
     default:
@@ -69,29 +69,32 @@ void MainWindow::on_PointButton_clicked() {
   }
 }
 
+/// Когда меняется текст на дисплее.
+/// Изменяем состояние всех кнопок.
+/// Можно нажимать ".", только если на дисплее точек ещё нет
+///-->
 void MainWindow::on_display_textChanged(const QString& arg1) {
-  // Изменяем состояние всех кнопок
-
-  // Можно нажимать ".",
-  // только если на дисплее точек ещё нет
   int points = ui->display->text().count(".");
   ui->PointButton->setEnabled(points == 0);
 }
+///<--
 
 void MainWindow::on_operation_clicked() {
   if(calcState == OPERATION)
     return;
 
-  // Получаем компонент
+  /// Выполнение операции:
+  /// Получаем компонент отправивший сигнал
+  ///-->
   QPushButton* operButton =
     dynamic_cast<QPushButton*>
     (QObject::sender());
+  ///<--
 
-  // Складываем содержимое экрана и память
-  QString as = ui->memory->text();
-  QString bs = ui->display->text();
-  double a = as.toDouble();
-  double b = bs.toDouble();
+  /// Выполняем операцию над содержимым экрана и памятью
+  ///-->
+  double a = ui->memory->text().toDouble();
+  double b = ui->display->text().toDouble();
   double res = 0;
   QString nextOp = operButton->text();
 
@@ -139,6 +142,7 @@ void MainWindow::on_operation_clicked() {
   ui->memory->setText(strRes); // + " +");
 
   setState(OPERATION);
+  ///<--
 }
 
 void MainWindow::setState(CalcStates state) {

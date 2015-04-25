@@ -18,9 +18,6 @@ class MainWindow : public QMainWindow {
   void clearDisplay();
  private slots:
 
-  // Когда нажимаем на любую
-  // кнопку с цифрой
-  // вызывается этот слот
   void on_digit_clicked();
 
   void on_PointButton_clicked();
