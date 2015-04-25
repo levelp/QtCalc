@@ -57,7 +57,7 @@
        <property name="geometry">
         <rect>
          <x>320</x>
-         <y>40</y>
+         <y>100</y>
          <width>111</width>
          <height>20</height>
         </rect>
@@ -240,9 +240,9 @@
       <widget class="QPushButton" name="ClearButton">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>330</x>
          <y>20</y>
-         <width>41</width>
+         <width>81</width>
          <height>31</height>
         </rect>
        </property>
@@ -278,8 +278,8 @@
       <widget class="QLabel" name="memory">
        <property name="geometry">
         <rect>
-         <x>340</x>
-         <y>10</y>
+         <x>330</x>
+         <y>70</y>
          <width>71</width>
          <height>16</height>
         </rect>
@@ -332,8 +332,8 @@
       <widget class="QPushButton" name="calcButton">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>60</y>
+         <x>280</x>
+         <y>20</y>
          <width>41</width>
          <height>31</height>
         </rect>
@@ -370,8 +370,8 @@
       <widget class="QLabel" name="operation">
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>70</y>
+         <x>330</x>
+         <y>130</y>
          <width>47</width>
          <height>13</height>
         </rect>
@@ -383,8 +383,8 @@
       <widget class="QPushButton" name="minusButton_2">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>100</y>
+         <x>220</x>
+         <y>20</y>
          <width>41</width>
          <height>31</height>
         </rect>
@@ -402,8 +402,8 @@
       <widget class="QPushButton" name="minusButton_3">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>100</y>
+         <x>220</x>
+         <y>60</y>
          <width>41</width>
          <height>31</height>
         </rect>
