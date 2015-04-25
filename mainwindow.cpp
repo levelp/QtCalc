@@ -1,10 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+const char NO_OPERATION = '#';
+
 MainWindow::MainWindow(QWidget* parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow) {
   ui->setupUi(this);
+
+  ui->debugOperation->setText(QChar(NO_OPERATION));
 
   setState(ENTER_NUMBER);
 }
@@ -74,16 +78,59 @@ void MainWindow::on_display_textChanged(const QString& arg1) {
   ui->PointButton->setEnabled(points == 0);
 }
 
-void MainWindow::on_PlusButton_clicked() {
+void MainWindow::on_operation_clicked() {
   if(calcState == OPERATION)
     return;
+
+  // Получаем компонент
+  QPushButton* operButton =
+    dynamic_cast<QPushButton*>
+    (QObject::sender());
 
   // Складываем содержимое экрана и память
   QString as = ui->memory->text();
   QString bs = ui->display->text();
   double a = as.toDouble();
   double b = bs.toDouble();
-  double res = a + b;
+  double res = 0;
+  QString nextOp = operButton->text();
+
+  switch (ui->debugOperation->text().at(0).toLatin1()) {
+    case '+':
+      res = a + b;
+      break;
+
+    case '-':
+      res = a - b;
+      break;
+
+    case '*':
+      res = a * b;
+      break;
+
+    case '/':
+      res = a / b;
+      break;
+
+    case '=':
+      res = b;
+      nextOp = QChar(NO_OPERATION);
+      break;
+
+    case NO_OPERATION:
+      res = b;
+      break;
+
+    default:
+      throw new QString("Unknown operation: " + operButton->text());
+  }
+
+  // Запоминаем нажатую кнопку - следующую операцию
+  if(nextOp == QStringLiteral("="))
+    ui->debugOperation->setText(QChar(NO_OPERATION));
+  else
+    ui->debugOperation->setText(nextOp);
+
   QString strTemplate("%1");
   QString strRes = strTemplate.arg(res);
 
@@ -114,25 +161,4 @@ void MainWindow::setState(CalcStates state) {
 
 void MainWindow::on_ClearButton_clicked() {
   clearDisplay();
-}
-
-void MainWindow::on_calcButton_clicked() {
-  if(calcState == OPERATION)
-    return;
-
-  // Складываем содержимое экрана и память
-  QString as = ui->memory->text();
-  QString bs = ui->display->text();
-  double a = as.toDouble();
-  double b = bs.toDouble();
-  // TODO: применять последнюю операцию
-  double res = a + b;
-  QString strTemplate("%1");
-  QString strRes = strTemplate.arg(res);
-
-  // Показываем значение на экране
-  ui->display->setText(strRes);
-  ui->memory->setText(strRes); // + " +");
-
-  setState(ENTER_NUMBER);
 }

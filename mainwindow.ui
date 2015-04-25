@@ -348,6 +348,76 @@
         <string>=</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="minusButton">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>60</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Verdana</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="debugOperation">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>70</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="minusButton_2">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>100</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Verdana</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>*</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="minusButton_3">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>100</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Verdana</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>/</string>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -534,8 +604,89 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>minusButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_operation_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>168</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>106</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>PlusButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_operation_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>313</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minusButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_operation_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>148</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minusButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_operation_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>284</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calcButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_operation_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>280</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_digit_clicked()</slot>
+  <slot>on_operation_clicked()</slot>
  </slots>
 </ui>

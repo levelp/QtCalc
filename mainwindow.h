@@ -27,17 +27,15 @@ class MainWindow : public QMainWindow {
 
   void on_display_textChanged(const QString& arg1);
 
-  void on_PlusButton_clicked();
+  void on_operation_clicked();
 
   void on_ClearButton_clicked();
-
-  void on_calcButton_clicked();
 
  private:
   Ui::MainWindow* ui;
 
   CalcStates calcState;
-  QChar operation;
+
   void setState(CalcStates state);
 };
 
