@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>456</width>
-    <height>278</height>
+    <height>413</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -418,7 +418,23 @@
         <string>/</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="undoButton">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>60</y>
+         <width>51</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Отмена</string>
+       </property>
+      </widget>
      </widget>
+    </item>
+    <item>
+     <widget class="QListWidget" name="listWidget"/>
     </item>
    </layout>
   </widget>

@@ -13,9 +13,11 @@ TEMPLATE = app
 FORMS    += mainwindow.ui
 
 HEADERS  += mainwindow.h \
-    CalcStates.h
+    CalcStates.h \
+    command.h
 
 SOURCES += main.cpp\
-   mainwindow.cpp
+   mainwindow.cpp \
+    command.cpp
 
 

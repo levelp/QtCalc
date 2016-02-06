@@ -91,41 +91,52 @@ void MainWindow::on_operation_clicked() {
     (QObject::sender());
   ///<--
 
-  /// Выполняем операцию над содержимым экрана и памятью
-  ///-->
-  double a = ui->memory->text().toDouble();
-  double b = ui->display->text().toDouble();
-  double res = 0;
+  // Следующая операция
   QString nextOp = operButton->text();
 
+  /// Выполняем операцию над содержимым экрана и памятью
+  ///-->
+  Command* cmd = NULL;
+  double res = 0;
   switch (ui->operation->text().at(0).toLatin1()) {
     case '+':
-      res = a + b;
+      cmd = new Add();
       break;
-
     case '-':
-      res = a - b;
+      cmd = new Sub();
       break;
-
     case '*':
-      res = a * b;
+      cmd = new Mul();
       break;
-
     case '/':
-      res = a / b;
+      cmd = new Div();
       break;
 
     case '=':
-      res = b;
+      cmd = new Eq();
       nextOp = QChar(NO_OPERATION);
       break;
 
     case NO_OPERATION:
-      res = b;
+      cmd = new Eq();
       break;
 
     default:
       throw new QString("Unknown operation: " + operButton->text());
+  }
+
+  if(cmd != NULL) {
+    // Передаём данные в команду
+    cmd->a = ui->memory->text().toDouble();
+    cmd->b = ui->display->text().toDouble();
+    // Добавляем команду в список
+    cmds.append(cmd);
+
+    // Выполняем команду
+    cmd->execute();
+
+    res = cmd->result;
+
   }
 
   // Запоминаем нажатую кнопку - следующую операцию
@@ -142,6 +153,8 @@ void MainWindow::on_operation_clicked() {
   ui->memory->setText(strRes); // + " +");
 
   setState(OPERATION);
+
+  refreshList();
   ///<--
 }
 
@@ -165,4 +178,39 @@ void MainWindow::setState(CalcStates state) {
 
 void MainWindow::on_ClearButton_clicked() {
   clearDisplay();
+}
+
+void MainWindow::on_undoButton_clicked() {
+  // Получаем последнюю команду
+  Command* cmd = cmds.at(cmds.size() - 1);
+  // 2 + 3 + 5
+
+  double res = cmd->a;
+
+  QString strTemplate("%1");
+  QString strRes = strTemplate.arg(res);
+
+  // Показываем значение на экране
+  ui->display->setText(strRes);
+  ui->memory->setText(strRes); // + " +");
+
+  // Удаляем последнюю
+  cmds.removeAt(cmds.size() - 1);
+
+  setState(OPERATION);
+
+  refreshList();
+}
+
+void MainWindow::refreshList() {
+  ui->listWidget->clear();
+  for(int i = 0; i < cmds.size(); i++) {
+    ui->listWidget->addItem(
+      QString("%1. %2 %3 %4 = %5").arg(i + 1).
+      arg(cmds.at(i)->a).
+      arg(cmds.at(i)->operation).
+      arg(cmds.at(i)->b).
+      arg(cmds.at(i)->result)
+    );
+  }
 }
